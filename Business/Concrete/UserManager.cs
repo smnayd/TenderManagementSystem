@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
@@ -19,19 +21,30 @@ namespace Business.Concrete
             _userDal = userDal;
         }
 
-        public List<User> GetAll()
+        public IResult Add(User user)
         {
-            return _userDal.GetAll();
+            if(user.Password!.Length<8)
+            {
+                return new ErrorResult(Messages.UserPasswordInvalid);
+            }
+            _userDal.Add(user);
+            return new SuccessResult(Messages.UserAdded);
         }
 
-        public List<User> GetByIsAdmin(byte[] isAdmin)
+        public IDataResult<List<User>> GetAll()
         {
-            return _userDal.GetAll(u => u.IsAdmin == isAdmin);
+            return new DataResult<List<User>>(_userDal.GetAll(),true);
         }
 
-        public List<UserDetailDto> GetUserDetails()
+        public IDataResult<List<User>> GetByIsAdmin(byte[] isAdmin)
         {
-            return _userDal.GetUserDetails();
+            return new SuccessDataResult<List<User>>(_userDal.GetAll(u => u.IsAdmin == isAdmin));
         }
+
+        public IDataResult<List<UserDetailDto>> GetUserDetails()
+        {
+            return new SuccessDataResult<List<UserDetailDto>>(_userDal.GetUserDetails());
+        }
+
     }
 }

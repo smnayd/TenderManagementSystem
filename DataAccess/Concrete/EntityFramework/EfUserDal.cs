@@ -24,12 +24,8 @@ namespace DataAccess.Concrete.EntityFramework
                              select new UserDetailDto
                              {
                                  ID = u.ID,
-                                 Email = u.Email,
                                  FirstName = u.FirstName,
-                                 IdentityNumber = u.IdentityNumber,
-                                 IsAdmin = u.IsAdmin,
                                  LastName = u.LastName,
-                                 Password = u.Password
                              };
                 return result.ToList();
             }

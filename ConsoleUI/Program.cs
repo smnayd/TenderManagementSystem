@@ -35,7 +35,7 @@ namespace ConsoleUI
         private static void UserTest()
         {
             UserManager userManager = new UserManager(new EfUserDal());
-            foreach (var user in userManager.GetAll())
+            foreach (var user in userManager.GetAll().Data)
             {
                 Console.WriteLine("ID: " + user.ID + " User Name: " + user.FirstName + user.LastName + " User Identity Number: " + user.IdentityNumber +
                     " User Email: " + user.Email);
