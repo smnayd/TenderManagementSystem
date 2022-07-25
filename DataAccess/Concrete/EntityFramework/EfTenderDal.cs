@@ -1,5 +1,7 @@
-﻿using DataAccess.Abstract;
+﻿using Core.DataAccess.EntityFramework;
+using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,53 +12,35 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfTenderDal : ITenderDal
+    public class EfTenderDal : EfEntityRepositoryBase<Tender, TenderSystemDbContext>, ITenderDal
     {
-        public void Add(Tender entity)
+        public List<TenderDetailDto> GetTenderDetail()
         {
             using (TenderSystemDbContext context = new TenderSystemDbContext())
             {
-                var addedEntity = context.Entry(entity);
-                addedEntity.State = EntityState.Added;
-                context.SaveChanges();
+                var result = from t in context.Tenders
+                             join u in context.Users!
+                             on t.UserID equals u.ID
+                             select new TenderDetailDto
+                             {
+                                 UserID = t.UserID,
+                                 CategoryID = t.CategoryID,
+                                 EndDate = t.EndDate,
+                                 EndPrice = t.EndPrice,
+                                 StartDate = t.StartDate,
+                                 StartPrice = t.StartPrice,
+                                 StatusID = t.StatusID,
+                                 TenderID = t.TenderID,
+                                 TenderNumber = t.TenderNumber,
+                                 TenderTitle = t.TenderTitle
+                             };
+                return result.ToList();
             }
         }
 
-        public void Delete(Tender entity)
+        public List<TenderDetailDto> GetTenderDetails()
         {
-            using (TenderSystemDbContext context = new TenderSystemDbContext())
-            {
-                var deletedEntity = context.Entry(entity);
-                deletedEntity.State = EntityState.Deleted;
-                context.SaveChanges();
-            }
-        }
-
-        public Tender Get(Expression<Func<Tender, bool>> filter)
-        {
-            using (TenderSystemDbContext context = new TenderSystemDbContext())
-            {
-                return context.Set<Tender>().SingleOrDefault()!;
-            }
-        }
-        public List<Tender> GetAll(Expression<Func<Tender, bool>> filter = null!)
-        {
-            using (TenderSystemDbContext context = new TenderSystemDbContext())
-            {
-                return filter == null
-                    ? context.Set<Tender>().ToList()
-                    : context.Set<Tender>().Where(filter).ToList();
-            }
-        }
-
-        public void Update(Tender entity)
-        {
-            using (TenderSystemDbContext context = new TenderSystemDbContext())
-            {
-                var updatedEntity = context.Entry(entity);
-                updatedEntity.State = EntityState.Modified;
-                context.SaveChanges();
-            }
+            throw new NotImplementedException();
         }
     }
 }

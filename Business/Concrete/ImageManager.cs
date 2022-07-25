@@ -25,7 +25,7 @@ namespace Business.Concrete
 
         public List<Image> GetByTenderID(int TenderID)
         {
-            return _imageDal.GetAll(p=>p.TenderID == TenderID);
+            return _imageDal.GetAll(i=>i.TenderID == TenderID);
         }
     }
 }

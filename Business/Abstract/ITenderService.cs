@@ -1,4 +1,5 @@
 ﻿using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +11,10 @@ namespace Business.Abstract
     public interface ITenderService
     {
         List<Tender> GetAll();
+        Tender GetByTenderID(int TenderID);
         List<Tender> GetByCategoryID(int CategoryID);
         List<Tender> GetByStatusID(int StatusID);
         List<Tender> GetByUserID(int UserID);
+        List<TenderDetailDto> GetTenderDetailDtos();
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,18 +26,28 @@ namespace Business.Concrete
 
         public List<Tender> GetByCategoryID(int CategoryID)
         {
-            return _tenderDal.GetAll(p=>p.CategoryID==CategoryID);
+            return _tenderDal.GetAll(t=>t.CategoryID==CategoryID);
         }
 
 
         public List<Tender> GetByStatusID(int StatusID)
         {
-            return _tenderDal.GetAll(p=>p.StatusID==StatusID);
+            return _tenderDal.GetAll(t=>t.StatusID==StatusID);
+        }
+
+        public Tender GetByTenderID(int TenderID)
+        {
+            return _tenderDal.Get(t => t.TenderID == TenderID);
         }
 
         public List<Tender> GetByUserID(int UserID)
         {
-            return _tenderDal.GetAll(p=>p.UserID==UserID);
+            return _tenderDal.GetAll(t=>t.UserID==UserID);
+        }
+
+        public List<TenderDetailDto> GetTenderDetailDtos()
+        {
+            return _tenderDal.GetTenderDetails();
         }
     }
 }

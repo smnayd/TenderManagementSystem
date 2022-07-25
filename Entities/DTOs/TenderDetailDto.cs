@@ -1,35 +1,24 @@
 ﻿using Core.Entities;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities.Concrete
+namespace Entities.DTOs
 {
-    public class Tender : IEntity
+    public class TenderDetailDto:IDto
     {
-        [Key]
         public int TenderID { get; set; }
-        [Required]
         public int UserID { get; set; }
-        [Required]
         public int StatusID { get; set; }
-        [Required]
         public int CategoryID { get; set; }
-        [Required]
-        [StringLength(50)]
         public string? TenderTitle { get; set; }
-        [Required]
         public int TenderNumber { get; set; }
-        [Required]
         public decimal StartPrice { get; set; }
-        [Required]
         public decimal EndPrice { get; set; }
-        [Required]
         public DateTime StartDate { get; set; }
-        [Required]
         public DateTime EndDate { get; set; }
     }
 }
+

@@ -1,4 +1,5 @@
-﻿using DataAccess.Abstract;
+﻿using Core.DataAccess.EntityFramework;
+using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -9,26 +10,8 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfCategoryDal : ICategoryDal
+    public class EfCategoryDal : EfEntityRepositoryBase<Category, TenderSystemDbContext>, ICategoryDal
     {
         
-        public Category Get(Expression<Func<Category, bool>> filter)
-        {
-            using(TenderSystemDbContext context = new TenderSystemDbContext())
-            {
-                return context.Set<Category>().SingleOrDefault()!;
-            }
-        }
-
-        public List<Category> GetAll(Expression<Func<Category, bool>> filter = null!)
-        {
-            using(TenderSystemDbContext context = new TenderSystemDbContext())
-            {
-                return filter == null 
-                    ? context.Set<Category>().ToList() 
-                    : context.Set<Category>().Where(filter).ToList();
-            }
-        }
-
     }
 }

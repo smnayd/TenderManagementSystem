@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,14 +24,24 @@ namespace Business.Concrete
             return _bidDal.GetAll();
         }
 
+        public List<BidDetailDto> GetBidDetailDtos()
+        {
+            return _bidDal.GetBidDetails();
+        }
+
+        public Bid GetByBidID(int BidID)
+        {
+            return _bidDal.Get(b => b.BidID == BidID);
+        }
+
         public List<Bid> GetTenderID(int TenderID)
         {
-            return _bidDal.GetAll(p=>p.TenderID == TenderID);
+            return _bidDal.GetAll(b=>b.TenderID == TenderID);
         }
 
         public List<Bid> GetUserID(int UserID)
         {
-            return _bidDal.GetAll(p=>p.UserID == UserID);
+            return _bidDal.GetAll(b=>b.UserID == UserID);
         }
     }
 }

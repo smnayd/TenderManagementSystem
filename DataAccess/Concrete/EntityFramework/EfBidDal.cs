@@ -1,5 +1,7 @@
-﻿using DataAccess.Abstract;
+﻿using Core.DataAccess.EntityFramework;
+using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,53 +12,24 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfBidDal : IBidDal
+    public class EfBidDal : EfEntityRepositoryBase<Bid, TenderSystemDbContext>, IBidDal
     {
-        public void Add(Bid entity)
-        {
-            using(TenderSystemDbContext context = new TenderSystemDbContext())
-            {
-                var addedEntity = context.Entry(entity);
-                addedEntity.State = EntityState.Added;
-                context.SaveChanges();
-            }
-        }
-
-        public void Delete(Bid entity)
+        public List<BidDetailDto> GetBidDetails()
         {
             using (TenderSystemDbContext context = new TenderSystemDbContext())
             {
-                var deletedEntity = context.Entry(entity);
-                deletedEntity.State = EntityState.Deleted;
-                context.SaveChanges();
-            }
-        }
-
-        public Bid Get(Expression<Func<Bid, bool>> filter)
-        {
-            using(TenderSystemDbContext context = new TenderSystemDbContext())
-            {
-                return context.Set<Bid>().SingleOrDefault(filter)!;
-            }
-        }
-
-        public List<Bid> GetAll(Expression<Func<Bid, bool>> filter = null!)
-        {
-            using (TenderSystemDbContext context = new TenderSystemDbContext())
-            {
-                return filter == null
-                    ? context.Set<Bid>().ToList()
-                    : context.Set<Bid>().Where(filter).ToList();
-            }
-        }
-
-        public void Update(Bid entity)
-        {
-            using (TenderSystemDbContext context = new TenderSystemDbContext())
-            {
-                var updatedEntity = context.Entry(entity);
-                updatedEntity.State = EntityState.Modified;
-                context.SaveChanges();
+                var result = from b in context.Bids
+                             join u in context.Users!
+                             on b.BidID equals u.ID
+                             select new BidDetailDto
+                             {
+                                 BidID = b.BidID,
+                                 UserID = b.UserID,
+                                 BidDate = b.BidDate,
+                                 BidPrice = b.BidPrice,
+                                 TenderID = b.TenderID
+                             };
+                return result.ToList();
             }
         }
     }

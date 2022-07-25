@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,12 @@ namespace Business.Concrete
 
         public List<User> GetByIsAdmin(byte[] isAdmin)
         {
-            return _userDal.GetAll(p => p.IsAdmin == isAdmin);
+            return _userDal.GetAll(u => u.IsAdmin == isAdmin);
+        }
+
+        public List<UserDetailDto> GetUserDetails()
+        {
+            return _userDal.GetUserDetails();
         }
     }
 }

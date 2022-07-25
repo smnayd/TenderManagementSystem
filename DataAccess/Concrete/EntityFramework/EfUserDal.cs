@@ -1,5 +1,7 @@
-﻿using DataAccess.Abstract;
+﻿using Core.DataAccess.EntityFramework;
+using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,53 +12,26 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfUserDal : IUserDal
+    public class EfUserDal : EfEntityRepositoryBase<User, TenderSystemDbContext>, IUserDal
     {
-        public void Add(User entity)
+        public List<UserDetailDto> GetUserDetails()
         {
             using (TenderSystemDbContext context = new TenderSystemDbContext())
             {
-                var addedEntity = context.Entry(entity);
-                addedEntity.State = EntityState.Added;
-                context.SaveChanges();
-            }
-        }
-
-        public void Delete(User entity)
-        {
-            using (TenderSystemDbContext context = new TenderSystemDbContext())
-            {
-                var deletedEntity = context.Entry(entity);
-                deletedEntity.State = EntityState.Deleted;
-                context.SaveChanges();
-            }
-        }
-
-        public User Get(Expression<Func<User, bool>> filter)
-        {
-            using(TenderSystemDbContext context = new TenderSystemDbContext())
-            {
-                return context.Set<User>().SingleOrDefault(filter)!;
-            }
-        }
-
-        public List<User> GetAll(Expression<Func<User, bool>> filter = null!)
-        {
-            using(TenderSystemDbContext context = new TenderSystemDbContext())
-            {
-                return filter == null
-                    ? context.Set<User>().ToList()
-                    : context.Set<User>().Where(filter).ToList();
-            }
-        }
-
-        public void Update(User entity)
-        {
-            using (TenderSystemDbContext context = new TenderSystemDbContext())
-            {
-                var updatedEntity = context.Entry(entity);
-                updatedEntity.State = EntityState.Modified;
-                context.SaveChanges();
+                var result = from u in context.Users!
+                             join t in context.Tenders! 
+                             on u.ID equals t.UserID
+                             select new UserDetailDto
+                             {
+                                 ID = u.ID,
+                                 Email = u.Email,
+                                 FirstName = u.FirstName,
+                                 IdentityNumber = u.IdentityNumber,
+                                 IsAdmin = u.IsAdmin,
+                                 LastName = u.LastName,
+                                 Password = u.Password
+                             };
+                return result.ToList();
             }
         }
     }

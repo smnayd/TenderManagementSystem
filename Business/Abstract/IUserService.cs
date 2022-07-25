@@ -1,4 +1,5 @@
 ﻿using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,6 @@ namespace Business.Abstract
     {
         List<User> GetAll();
         List<User> GetByIsAdmin(byte[] isAdmin);
+        List<UserDetailDto> GetUserDetails();
     }
 }
