@@ -17,8 +17,8 @@ namespace Entities.DTOs
         public int TenderNumber { get; set; }
         public decimal StartPrice { get; set; }
         public decimal EndPrice { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public string? StartDate { get; set; }
+        public string? EndDate { get; set; }
     }
 }
 

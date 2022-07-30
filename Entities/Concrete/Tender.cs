@@ -28,8 +28,8 @@ namespace Entities.Concrete
         [Required]
         public decimal EndPrice { get; set; }
         [Required]
-        public DateTime StartDate { get; set; }
+        public string? StartDate { get; set; }
         [Required]
-        public DateTime EndDate { get; set; }
+        public string? EndDate { get; set; }
     }
 }

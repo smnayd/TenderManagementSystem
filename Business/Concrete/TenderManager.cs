@@ -35,7 +35,7 @@ namespace Business.Concrete
 
         public IDataResult<List<Tender>> GetAll()
         {
-            return new SuccessDataResult<List<Tender>>(_tenderDal.GetAll());
+            return new SuccessDataResult<List<Tender>>(_tenderDal.GetAll(),Messages.TenderListed);
         }
 
         public IDataResult<List<Tender>> GetByCategoryID(int CategoryID)

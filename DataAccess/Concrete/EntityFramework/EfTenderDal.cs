@@ -25,7 +25,7 @@ namespace DataAccess.Concrete.EntityFramework
                              {
                                  UserID = t.UserID,
                                  CategoryID = t.CategoryID,
-                                 EndDate = t.EndDate,
+                                 EndDate = t.EndDate,  
                                  EndPrice = t.EndPrice,
                                  StartDate = t.StartDate,
                                  StartPrice = t.StartPrice,

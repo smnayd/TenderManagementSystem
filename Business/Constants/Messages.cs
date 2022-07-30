@@ -19,6 +19,6 @@ namespace Business.Constants
         public static string TenderAdded = "Tender Added";
         public static string TenderDeleted = "Tender Deleted";
         public static string TenderUpdated = "Tender Updated";
-
+        public static string TenderListed = "Tender Listed";
     }
 }
