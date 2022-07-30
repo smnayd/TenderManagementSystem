@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
@@ -18,9 +19,9 @@ namespace Business.Concrete
             _statusDal = statusDal;
         }
 
-        public List<Status> GetAll()
+        public IDataResult<List<Status>> GetAll()
         {
-            return _statusDal.GetAll();
+            return new SuccessDataResult<List<Status>>(_statusDal.GetAll());
         }
     }
 }

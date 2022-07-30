@@ -1,4 +1,5 @@
-﻿using Entities.Concrete;
+﻿using Core.Utilities.Results;
+using Entities.Concrete;
 using Entities.DTOs;
 using System;
 using System.Collections.Generic;
@@ -10,11 +11,14 @@ namespace Business.Abstract
 {
     public interface ITenderService
     {
-        List<Tender> GetAll();
-        Tender GetByTenderID(int TenderID);
-        List<Tender> GetByCategoryID(int CategoryID);
-        List<Tender> GetByStatusID(int StatusID);
-        List<Tender> GetByUserID(int UserID);
-        List<TenderDetailDto> GetTenderDetailDtos();
+        IDataResult<List<Tender>> GetAll();
+        IDataResult<Tender> GetByTenderID(int TenderID);
+        IDataResult<List<Tender>> GetByCategoryID(int CategoryID);
+        IDataResult<List<Tender>> GetByStatusID(int StatusID);
+        IDataResult<List<Tender>> GetByUserID(int UserID);
+        IDataResult<List<TenderDetailDto>> GetTenderDetailDtos();
+        IResult Add(Tender tender);
+        IResult Update(Tender tender);
+        IResult Delete(int tenderID);
     }
 }

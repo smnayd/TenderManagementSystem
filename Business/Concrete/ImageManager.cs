@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
@@ -18,14 +20,20 @@ namespace Business.Concrete
             _imageDal = imageDal;
         }
 
-        public List<Image> GetAll()
+        public IResult Add(Image image)
         {
-            return _imageDal.GetAll();
+            _imageDal.Add(image);
+            return new SuccessResult(Messages.ImageAdded);
         }
 
-        public List<Image> GetByTenderID(int TenderID)
+        public IDataResult<List<Image>> GetAll()
         {
-            return _imageDal.GetAll(i=>i.TenderID == TenderID);
+            return new SuccessDataResult<List<Image>>(_imageDal.GetAll());
+        }
+
+        public IDataResult<List<Image>> GetByTenderID(int TenderID)
+        {
+            return new SuccessDataResult<List<Image>>(_imageDal.GetAll(i=>i.TenderID == TenderID));
         }
     }
 }

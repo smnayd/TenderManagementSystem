@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
@@ -19,29 +21,48 @@ namespace Business.Concrete
             _bidDal = bidDal;
         }
 
-        public List<Bid> GetAll()
+        public IResult Add(Bid bid)
         {
-            return _bidDal.GetAll();
+            _bidDal.Add(bid);
+            return new SuccessResult(Messages.BidAdded);
         }
 
-        public List<BidDetailDto> GetBidDetailDtos()
+        public IResult Delete(int BidID)
         {
-            return _bidDal.GetBidDetails();
+            _bidDal.Delete(new Bid { BidID = BidID });
+            return new SuccessResult(Messages.BidDeleted);
         }
 
-        public Bid GetByBidID(int BidID)
+        public IDataResult<List<Bid>> GetAll()
         {
-            return _bidDal.Get(b => b.BidID == BidID);
+            return new SuccessDataResult<List<Bid>>(_bidDal.GetAll());
         }
 
-        public List<Bid> GetTenderID(int TenderID)
+        public IDataResult<List<BidDetailDto>> GetBidDetailDtos()
         {
-            return _bidDal.GetAll(b=>b.TenderID == TenderID);
+            return new SuccessDataResult<List<BidDetailDto>>(_bidDal.GetBidDetails());
         }
 
-        public List<Bid> GetUserID(int UserID)
+        public IDataResult<Bid> GetByBidID(int BidID)
         {
-            return _bidDal.GetAll(b=>b.UserID == UserID);
+            return new SuccessDataResult<Bid>(_bidDal.Get(b => b.BidID == BidID));
         }
+
+        public IDataResult<List<Bid>> GetTenderID(int TenderID)
+        {
+            return new SuccessDataResult<List<Bid>>(_bidDal.GetAll(b=>b.TenderID == TenderID));
+        }
+
+        public IDataResult<List<Bid>> GetUserID(int UserID)
+        {
+            return new SuccessDataResult<List<Bid>>(_bidDal.GetAll(b=>b.UserID == UserID));
+        }
+
+        public IResult Update(Bid bid)
+        {
+            _bidDal.Update(bid);
+            return new SuccessResult(Messages.BidUpdated);
+        }
+
     }
 }

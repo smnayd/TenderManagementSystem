@@ -23,9 +23,8 @@ namespace DataAccess.Concrete.EntityFramework
                              on u.ID equals t.UserID
                              select new UserDetailDto
                              {
-                                 ID = u.ID,
-                                 FirstName = u.FirstName,
-                                 LastName = u.LastName,
+                                 ID = u.ID, 
+                                 Username = u.Username                            
                              };
                 return result.ToList();
             }

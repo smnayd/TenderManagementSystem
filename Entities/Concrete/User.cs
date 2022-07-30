@@ -14,20 +14,18 @@ namespace Entities.Concrete
         public int ID { get; set; }
         [Required]
         [MaxLength(11)]
-        public int IdentityNumber { get; set; }
+        public long IdentityNumber { get; set; }
         [Required]
         [StringLength(50)]
-        public string? FirstName { get; set; }
-        [Required]
-        [StringLength(50)]
-        public string? LastName { get; set; }
+        public string? Username { get; set; }        
         [Required]
         [StringLength(30)]
         public string? Email { get; set; }
         [Required]
-        [StringLength(15)]
-        public string? Password { get; set; }
+        public Byte[]? PasswordHash { get; set; }
         [Required]
-        public byte[]? IsAdmin { get; set; }
+        public Byte[]? PAsswordSalt { get; set; }
+        [Required]
+        public bool IsAdmin { get; set; }
     }
 }

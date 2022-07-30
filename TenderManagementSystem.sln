@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\Da
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleUI", "ConsoleUI\ConsoleUI.csproj", "{BA8E90C5-E2D0-4AE5-A0F9-81E46F42721B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{4F5EEDC0-7B34-4727-85E7-12D6617CCC30}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{4F5EEDC0-7B34-4727-85E7-12D6617CCC30}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

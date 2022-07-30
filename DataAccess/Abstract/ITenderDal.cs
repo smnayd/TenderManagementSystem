@@ -12,5 +12,6 @@ namespace DataAccess.Abstract
     public interface ITenderDal:IEntityRepository<Tender>
     {
         List<TenderDetailDto> GetTenderDetails();
+       
     }
 }

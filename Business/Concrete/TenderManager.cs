@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
@@ -19,35 +21,53 @@ namespace Business.Concrete
             _tenderDal = tenderDal;
         }
 
-        public List<Tender> GetAll()
+        public IResult Add(Tender tender)
         {
-            return _tenderDal.GetAll();
+            _tenderDal.Add(tender);
+            return new SuccessResult(Messages.TenderAdded);
         }
 
-        public List<Tender> GetByCategoryID(int CategoryID)
+        public IResult Delete(int tenderID)
         {
-            return _tenderDal.GetAll(t=>t.CategoryID==CategoryID);
+            _tenderDal.Delete(new Tender { TenderID = tenderID });
+            return new SuccessResult(Messages.TenderDeleted);
+        }
+
+        public IDataResult<List<Tender>> GetAll()
+        {
+            return new SuccessDataResult<List<Tender>>(_tenderDal.GetAll());
+        }
+
+        public IDataResult<List<Tender>> GetByCategoryID(int CategoryID)
+        {
+            return new SuccessDataResult<List<Tender>>(_tenderDal.GetAll(t=>t.CategoryID==CategoryID));
         }
 
 
-        public List<Tender> GetByStatusID(int StatusID)
+        public IDataResult<List<Tender>> GetByStatusID(int StatusID)
         {
-            return _tenderDal.GetAll(t=>t.StatusID==StatusID);
+            return new SuccessDataResult<List<Tender>>(_tenderDal.GetAll(t=>t.StatusID==StatusID));
         }
 
-        public Tender GetByTenderID(int TenderID)
+        public IDataResult<Tender> GetByTenderID(int TenderID)
         {
-            return _tenderDal.Get(t => t.TenderID == TenderID);
+            return new SuccessDataResult<Tender>(_tenderDal.Get(t => t.TenderID == TenderID));
         }
 
-        public List<Tender> GetByUserID(int UserID)
+        public IDataResult<List<Tender>> GetByUserID(int UserID)
         {
-            return _tenderDal.GetAll(t=>t.UserID==UserID);
+            return new SuccessDataResult<List<Tender>>(_tenderDal.GetAll(t => t.UserID == UserID));
         }
 
-        public List<TenderDetailDto> GetTenderDetailDtos()
+        public IDataResult<List<TenderDetailDto>> GetTenderDetailDtos()
         {
-            return _tenderDal.GetTenderDetails();
+            return new SuccessDataResult<List<TenderDetailDto>>(_tenderDal.GetTenderDetails());
+        }
+
+        public IResult Update(Tender tender)
+        {
+            _tenderDal.Update(tender);
+            return new SuccessResult(Messages.TenderUpdated);
         }
     }
 }

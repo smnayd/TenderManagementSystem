@@ -16,7 +16,7 @@ namespace ConsoleUI
         private static void CategoryTest()
         {
             CategoryManager categoryManager = new CategoryManager(new EfCategoryDal());
-            foreach (var category in categoryManager.GetAll())
+            foreach (var category in categoryManager.GetAll().Data)
             {
                 Console.WriteLine("\n Category Id: " + category.CategoryID + " Category Title: " + category.CategoryTitle);
             }
@@ -25,7 +25,7 @@ namespace ConsoleUI
         private static void BidTest()
         {
             BidManager bidManager = new BidManager(new EfBidDal());
-            foreach (var bid in bidManager.GetAll())
+            foreach (var bid in bidManager.GetAll().Data)
             {
                 Console.WriteLine("\n BidID: " + bid.BidID + " Bid User id: " + bid.UserID + " Bid Tender Id: " + bid.TenderID +
                     " Bid date: " + bid.BidDate + " Price: " + bid.BidPrice);
@@ -37,7 +37,7 @@ namespace ConsoleUI
             UserManager userManager = new UserManager(new EfUserDal());
             foreach (var user in userManager.GetAll().Data)
             {
-                Console.WriteLine("ID: " + user.ID + " User Name: " + user.FirstName + user.LastName + " User Identity Number: " + user.IdentityNumber +
+                Console.WriteLine("ID: " + user.ID + " UserName: " + user.Username + " User Identity Number: " + user.IdentityNumber +
                     " User Email: " + user.Email);
             }
         }

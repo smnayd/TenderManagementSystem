@@ -15,6 +15,10 @@ namespace Entities.Concrete
         [Required]
         public int TenderID { get; set; }
         [Required]
-        public byte[]? Photo { get; set; }
+        [StringLength(250)]
+        public string? Url { get; set; }
+        [Required]
+        [StringLength(250)]
+        public string? PublicID { get; set; }
     }
 }

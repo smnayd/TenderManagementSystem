@@ -23,20 +23,16 @@ namespace Business.Concrete
 
         public IResult Add(User user)
         {
-            if(user.Password!.Length<8)
-            {
-                return new ErrorResult(Messages.UserPasswordInvalid);
-            }
             _userDal.Add(user);
             return new SuccessResult(Messages.UserAdded);
         }
 
         public IDataResult<List<User>> GetAll()
         {
-            return new DataResult<List<User>>(_userDal.GetAll(),true);
+            return new SuccessDataResult<List<User>>(_userDal.GetAll(), Messages.UserListed);
         }
 
-        public IDataResult<List<User>> GetByIsAdmin(byte[] isAdmin)
+        public IDataResult<List<User>> GetByIsAdmin(bool isAdmin)
         {
             return new SuccessDataResult<List<User>>(_userDal.GetAll(u => u.IsAdmin == isAdmin));
         }

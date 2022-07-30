@@ -1,4 +1,5 @@
-﻿using Entities.Concrete;
+﻿using Core.Utilities.Results;
+using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,8 @@ namespace Business.Abstract
 {
     public interface IImageService
     {
-        List<Image> GetAll();
-        List<Image> GetByTenderID(int TenderID);
+        IDataResult<List<Image>> GetAll();
+        IDataResult<List<Image>> GetByTenderID(int TenderID);
+        IResult Add(Image image);
     }
 }
