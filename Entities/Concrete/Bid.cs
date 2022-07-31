@@ -12,13 +12,9 @@ namespace Entities.Concrete
     {
         [Key]
         public int BidID { get; set; }
-        [Required]
         public int TenderID { get; set; }
-        [Required]
         public int UserID { get; set; }
-        [Required]
         public decimal BidPrice { get; set; }
-        [Required]
         public DateTime BidDate { get; set; }
     }
 }

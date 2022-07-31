@@ -12,7 +12,6 @@ namespace Entities.Concrete
     {
         [Key]
         public int CategoryID { get; set; }
-        [Required]
         public string? CategoryTitle { get; set; }
     }
 }

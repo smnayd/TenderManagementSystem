@@ -12,8 +12,6 @@ namespace Entities.Concrete
     {
         [Key]
         public int StatusID { get; set; }
-        [Required]
-        [StringLength(20)]
         public string? State { get; set; }
     }
 }

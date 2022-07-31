@@ -18,20 +18,20 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<TenderManager>().As<ITenderService>().SingleInstance();
             builder.RegisterType<EfTenderDal>().As<ITenderDal>().SingleInstance();
 
-            //builder.RegisterType<UserManager>().As<IUserService>().SingleInstance();
-            //builder.RegisterType<EfUserDal>().As<IUserDal>().SingleInstance();
+            builder.RegisterType<UserManager>().As<IUserService>().SingleInstance();
+            builder.RegisterType<EfUserDal>().As<IUserDal>().SingleInstance();
 
-            //builder.RegisterType<BidManager>().As<IBidService>().SingleInstance();
-            //builder.RegisterType<EfBidDal>().As<IBidDal>().SingleInstance();
+            builder.RegisterType<BidManager>().As<IBidService>().SingleInstance();
+            builder.RegisterType<EfBidDal>().As<IBidDal>().SingleInstance();
 
-            //builder.RegisterType<CategoryManager>().As<ICategoryService>().SingleInstance();
-            //builder.RegisterType<EfCategoryDal>().As<ICategoryDal>().SingleInstance();
+            builder.RegisterType<CategoryManager>().As<ICategoryService>().SingleInstance();
+            builder.RegisterType<EfCategoryDal>().As<ICategoryDal>().SingleInstance();
 
-            //builder.RegisterType<ImageManager>().As<IImageService>().SingleInstance();
-            //builder.RegisterType<EfImageDal>().As<IImageDal>().SingleInstance();
+            builder.RegisterType<ImageManager>().As<IImageService>().SingleInstance();
+            builder.RegisterType<EfImageDal>().As<IImageDal>().SingleInstance();
 
-            //builder.RegisterType<StatusManager>().As<IStatusService>().SingleInstance();
-            //builder.RegisterType<EfStatusDal>().As<IStatusDal>().SingleInstance();
+            builder.RegisterType<StatusManager>().As<IStatusService>().SingleInstance();
+            builder.RegisterType<EfStatusDal>().As<IStatusDal>().SingleInstance();
 
         
         }

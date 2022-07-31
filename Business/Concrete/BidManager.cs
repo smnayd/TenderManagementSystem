@@ -1,9 +1,11 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +25,14 @@ namespace Business.Concrete
 
         public IResult Add(Bid bid)
         {
+            var context = new ValidationContext<Bid>(bid);
+            BidValidator bidValidator = new BidValidator();
+            var result = bidValidator.Validate(context);
+            if (!result.IsValid)
+            {
+                throw new ValidationException(result.Errors);
+            } 
+
             _bidDal.Add(bid);
             return new SuccessResult(Messages.BidAdded);
         }
