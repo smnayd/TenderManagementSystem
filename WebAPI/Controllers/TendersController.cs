@@ -40,6 +40,50 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
+        [HttpGet("getbycategoryid")]
+        public IActionResult GetByCategoryID(int CategoryID)
+        {
+            var result = _tenderService.GetByCategoryID(CategoryID);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet("getbystatusid")]
+        public IActionResult GetByStatusID(int StatusID)
+        {
+            var result = _tenderService.GetByStatusID(StatusID);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet("getbyuserid")]
+        public IActionResult GetByUserID(int UserID)
+        {
+            var result = _tenderService.GetByUserID(UserID);
+            if(result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet("getbytenderdetaildtos")]
+        public IActionResult GetByTenderDetailDtos()
+        {
+            var result = _tenderService.GetTenderDetailDtos();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
         [HttpPost("add")]
         public IActionResult Add(Tender tender)
         { 

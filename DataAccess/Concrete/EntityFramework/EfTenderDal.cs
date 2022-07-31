@@ -14,7 +14,7 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfTenderDal : EfEntityRepositoryBase<Tender, TenderSystemDbContext>, ITenderDal
     {
-        public List<TenderDetailDto> GetTenderDetail()
+        public List<TenderDetailDto> GetTenderDetails()
         {
             using (TenderSystemDbContext context = new TenderSystemDbContext())
             {
@@ -38,9 +38,6 @@ namespace DataAccess.Concrete.EntityFramework
             }
         }
 
-        public List<TenderDetailDto> GetTenderDetails()
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }
