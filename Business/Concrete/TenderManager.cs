@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Business.Concrete
-{
+{  
     public class TenderManager : ITenderService
     {
         ITenderDal _tenderDal;
@@ -20,7 +20,7 @@ namespace Business.Concrete
         {
             _tenderDal = tenderDal;
         }
-
+        
         public IResult Add(Tender tender)
         {
             _tenderDal.Add(tender);

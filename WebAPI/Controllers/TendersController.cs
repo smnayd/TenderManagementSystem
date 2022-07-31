@@ -18,11 +18,37 @@ namespace WebAPI.Controllers
             _tenderService = tenderService;
         }
 
-        [HttpGet]
-        public List<Tender> Get()
+        [HttpGet("getall")]
+        public IActionResult GetAll()
         {           
             var result = _tenderService.GetAll();
-            return result.Data;
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet("getbytenderid")]
+        public IActionResult GetByTenderID(int TenderID)
+        {
+            var result = _tenderService.GetByTenderID(TenderID);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpPost("add")]
+        public IActionResult Add(Tender tender)
+        { 
+            var result = _tenderService.Add(tender);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
 
     }
