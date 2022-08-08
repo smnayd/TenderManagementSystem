@@ -13,7 +13,7 @@ namespace Business.ValidationRules.FluentValidation
         public UserValidator()
         {
             RuleFor(u => u.Email).NotEmpty();
-            RuleFor(u => u.Email).MaximumLength(30);
+            RuleFor(u => u.Email).MaximumLength(50);
             RuleFor(u => u.Username).NotEmpty();
             RuleFor(u => u.Username).MaximumLength(30);
             RuleFor(u => u.PasswordHash).NotNull();

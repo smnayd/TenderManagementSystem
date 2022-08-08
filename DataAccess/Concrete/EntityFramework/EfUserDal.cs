@@ -16,7 +16,7 @@ namespace DataAccess.Concrete.EntityFramework
     {
         public List<UserDetailDto> GetUserDetails()
         {
-            using (TenderSystemDbContext context = new TenderSystemDbContext())
+            using (var context = new TenderSystemDbContext())
             {
                 var result = from u in context.Users!
                              join t in context.Tenders! 
