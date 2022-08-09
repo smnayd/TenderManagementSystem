@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -20,7 +22,8 @@ namespace Business.Concrete
         {
             _tenderDal = tenderDal;
         }
-        
+
+        [ValidationAspect(typeof(TenderValidator))]
         public IResult Add(Tender tender)
         {
             _tenderDal.Add(tender);
@@ -64,6 +67,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<TenderDetailDto>>(_tenderDal.GetTenderDetails());
         }
 
+        [ValidationAspect(typeof(TenderValidator))]
         public IResult Update(Tender tender)
         {
             _tenderDal.Update(tender);

@@ -13,7 +13,9 @@ namespace DataAccess.Concrete.EntityFramework
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Server=saturn\sqlexpress; Database=TenderSystemDatabase; Trusted_Connection=true");
+           
         }
+
         public DbSet<User>? Users { get; set; }
         public DbSet<Bid>? Bids { get; set; }
         public DbSet<Tender>? Tenders { get; set; }

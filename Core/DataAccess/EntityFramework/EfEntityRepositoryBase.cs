@@ -15,17 +15,24 @@ namespace Core.DataAccess.EntityFramework
     {
         public void Add(TEntity entity)
         {
-            using (var context = new TContext())
+            using (TContext context = new TContext())
             {
                 var addedEntity = context.Entry(entity);
                 addedEntity.State = EntityState.Added;
-                context.SaveChanges();
+                try
+                {
+                    context.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.InnerException!.Message);
+                }
             }
         }
 
         public void Delete(TEntity entity)
         {
-            using (var context = new TContext())
+            using (TContext context = new TContext())
             {
                 var deletedEntity = context.Entry(entity);
                 deletedEntity.State = EntityState.Deleted;
@@ -43,7 +50,7 @@ namespace Core.DataAccess.EntityFramework
 
         public List<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null!)
         {
-            using (var context = new TContext())
+            using (TContext context = new TContext())
             {
                 return filter == null
                     ? context.Set<TEntity>().ToList()
@@ -53,7 +60,7 @@ namespace Core.DataAccess.EntityFramework
 
         public void Update(TEntity entity)
         {
-            using (var context = new TContext())
+            using (TContext context = new TContext())
             {
                 var updatedEntity = context.Entry(entity);
                 updatedEntity.State = EntityState.Modified;

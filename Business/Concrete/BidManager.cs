@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -23,16 +24,9 @@ namespace Business.Concrete
             _bidDal = bidDal;
         }
 
+        [ValidationAspect(typeof(BidValidator))]
         public IResult Add(Bid bid)
-        {
-            var context = new ValidationContext<Bid>(bid);
-            BidValidator bidValidator = new BidValidator();
-            var result = bidValidator.Validate(context);
-            if (!result.IsValid)
-            {
-                throw new ValidationException(result.Errors);
-            } 
-
+        {           
             _bidDal.Add(bid);
             return new SuccessResult(Messages.BidAdded);
         }

@@ -9,8 +9,7 @@ using System.Threading.Tasks;
 namespace Entities.Concrete
 {
     public class User : IEntity
-    {
-        [Key]
+    {       
         public int ID { get; set; }
         public long IdentityNumber { get; set; }
         public string? Username { get; set; }    
