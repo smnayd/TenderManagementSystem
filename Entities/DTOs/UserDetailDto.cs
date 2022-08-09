@@ -10,7 +10,6 @@ namespace Entities.DTOs
 {
     public class UserDetailDto:IDto
     {
-        [Key]
         public int ID { get; set; }
         public string? Username { get; set; }
     }

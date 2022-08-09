@@ -10,7 +10,6 @@ namespace Entities.Concrete
 {
     public class Image:IEntity
     {
-        [Key]
         public int ImageID { get; set; }
         public int TenderID { get; set; }
         public string? Url { get; set; }

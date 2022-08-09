@@ -10,7 +10,6 @@ namespace Entities.Concrete
 {
     public class Category:IEntity
     {
-        [Key]
         public int CategoryID { get; set; }
         public string? CategoryTitle { get; set; }
     }

@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.CCS;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
@@ -22,6 +23,7 @@ namespace Business.Concrete
         {
             _tenderDal = tenderDal;
         }
+
 
         [ValidationAspect(typeof(TenderValidator))]
         public IResult Add(Tender tender)

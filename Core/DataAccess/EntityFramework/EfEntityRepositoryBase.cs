@@ -36,7 +36,14 @@ namespace Core.DataAccess.EntityFramework
             {
                 var deletedEntity = context.Entry(entity);
                 deletedEntity.State = EntityState.Deleted;
-                context.SaveChanges();
+                try
+                {
+                    context.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.InnerException!.Message);
+                }
             }
         }
 
@@ -64,7 +71,14 @@ namespace Core.DataAccess.EntityFramework
             {
                 var updatedEntity = context.Entry(entity);
                 updatedEntity.State = EntityState.Modified;
-                context.SaveChanges();
+                try
+                {
+                    context.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.InnerException!.Message);
+                }
             }
         }
     }

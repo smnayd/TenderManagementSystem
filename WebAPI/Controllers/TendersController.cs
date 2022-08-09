@@ -94,6 +94,7 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
-        //delete ve update gerekli!!
-    }
+       
+            //delete ve update gerekli!!
+        }
 }

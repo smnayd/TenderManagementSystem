@@ -62,6 +62,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Bid>>(_bidDal.GetAll(b=>b.UserID == UserID));
         }
 
+        [ValidationAspect(typeof(BidValidator))]
         public IResult Update(Bid bid)
         {
             _bidDal.Update(bid);

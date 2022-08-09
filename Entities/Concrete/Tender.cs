@@ -10,7 +10,6 @@ namespace Entities.Concrete
 {
     public class Tender : IEntity
     {
-        [Key]
         public int TenderID { get; set; }
         public int UserID { get; set; }
         public int StatusID { get; set; }

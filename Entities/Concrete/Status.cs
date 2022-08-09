@@ -10,7 +10,6 @@ namespace Entities.Concrete
 {
     public class Status : IEntity
     {
-        [Key]
         public int StatusID { get; set; }
         public string? State { get; set; }
     }
